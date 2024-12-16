@@ -6,20 +6,20 @@ const tipoRouter = appExpress.Router()
 tipoRouter.get("/", async (req, res) => {
   try {
     let tipos = await obtenerTipos()
-    res.json(tipos).status(200)
+    res.status(200).json(tipos)
 
   } catch (error) {
-    res.json({ error: error.message }).status(500)
+    res.status(500).json({ error: error.message })
   }
 })
 
 tipoRouter.get("/:id", async (req, res) => {
   try {
     let tipo = await obtenerTipoPorId(req.params.id)
-    res.json(tipo).status(200)
+    res.status(200).json(tipo)
 
   } catch (error) {
-    res.json({ error: error.message }).status(500)
+    res.status(404).json({ error: error.message })
   }
 })
 
@@ -27,10 +27,10 @@ tipoRouter.post("/", async (req, res) => {
   try {
     let tipo = req.body
     let tipoCreado = await crearTipo(tipo)
-    res.json(tipoCreado).status(201)
+    res.status(201).json(tipoCreado)
 
   } catch (error) {
-    res.json({ error: error.message }).status(500)
+    res.status(500).json({ error: error.message })
   }
 })
 

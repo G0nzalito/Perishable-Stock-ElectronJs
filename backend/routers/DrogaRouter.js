@@ -6,20 +6,20 @@ const drogaRouter = appExpress.Router()
 drogaRouter.get("/", async (req, res) => {
   try {
     let drogas = await obtenerDrogas()
-    res.json(drogas).status(200)
+    res.status(200).json(drogas)
 
   } catch (error) {
-    res.json({ error: error.message }).status(500)
+    res.status(500).json({ error: error.message })
   }
 })
 
 drogaRouter.get("/:id", async (req, res) => {
   try {
     let droga = await obtenerDrogaPorId(req.params.id)
-    res.json(droga).status(200)
+    res.status(200).json(droga)
 
   } catch (error) {
-    res.json({ error: error.message }).status(500)
+    res.status(404).json({ error: error.message })
   }
 })
 
@@ -27,10 +27,10 @@ drogaRouter.post("/", async (req, res) => {
   try {
     let droga = req.body
     let drogaCreada = await crearDroga(droga)
-    res.json(drogaCreada).status(201)
+    res.status(201).json(drogaCreada)
 
   } catch (error) {
-    res.json({ error: error.message }).status(500)
+    res.status(500).json({ error: error.message })
   }
 })
 

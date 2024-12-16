@@ -6,24 +6,35 @@ export async function obtenerTipos() {
 }
 
 export async function obtenerTipoPorId(id) {
-  return await Tipo.findByPk(id)
+  const tipo = await Tipo.findByPk(id)
+  if (!tipo) {
+    throw new Error("Tipo no encontrado", 404)
+  }
+  return tipo
 }
 
 export async function obtenerTipoPorNombre(nombre) {
-  return await Tipo.findOne({
+  const tipo = await Tipo.findOne({
     where: {
       Nombre: {
         [Op.eq]: nombre,
       },
     },
   })
+
+  if (!tipo) {
+    throw new Error("Tipo no encontrado", 404)
+  }
+  return tipo
 }
 
 export async function crearTipo(tipo) {
-  let tipoExistente = await obtenerTipoPorNombre(tipo.Nombre)
-  if (tipoExistente) {
-    throw new Error("El tipo ya existe")
-  }else{
+  try{
+    const tipo = await obtenerTipoPorNombre(tipo.Nombre)
+    if (tipo) {
+      throw new Error("Tipo ya existe", 400)
+    }
+  }catch{
     return await Tipo.create(tipo)
   }
 }

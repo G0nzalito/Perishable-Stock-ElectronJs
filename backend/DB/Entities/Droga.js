@@ -4,7 +4,7 @@ import sequelize from "../db.js"
 const Droga = sequelize.define(
   "Droga",
   {
-    Id: {
+    idDroga: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
@@ -13,6 +13,10 @@ const Droga = sequelize.define(
     Nombre: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    Medida: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     }
   },
   {

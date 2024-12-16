@@ -2,7 +2,7 @@ import { DataTypes } from 'sequelize'
 import sequelize from '../db.js'
 
 const Remedio = sequelize.define('Remedio', {
-  Id: {
+  idRemedio: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
@@ -12,24 +12,12 @@ const Remedio = sequelize.define('Remedio', {
     type: DataTypes.STRING,
     allowNull: false
   },
-  Droga_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: 'Droga',
-      key: 'Id'
-    }
-  },
-  Medida:{
-    type: DataTypes.INTEGER,
-    allowNull: false
-  },
   Tipo_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
       model: 'Tipo',
-      key: 'Id',
+      key: 'idTipo',
 
     }
   },
@@ -37,12 +25,16 @@ const Remedio = sequelize.define('Remedio', {
     type: DataTypes.DATE,
     allowNull: false
   },
-  Cantidad: {
+  Contenido: {
     type: DataTypes.INTEGER,
     allowNull: false
   },
   Codigo: {
     type: DataTypes.STRING,
+    allowNull: false
+  },
+  Stock: {
+    type: DataTypes.INTEGER,
     allowNull: false
   }
 
@@ -50,6 +42,8 @@ const Remedio = sequelize.define('Remedio', {
   tableName: 'Remedio',
   timestamps: false
 })
+
+
 
 
 export default Remedio
