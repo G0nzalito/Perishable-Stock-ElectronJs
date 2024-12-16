@@ -16,10 +16,14 @@ export async function getRemedios() {
       },
       {
         model: Droga,
-        attributes: ["Nombre"],
+        attributes: ["Nombre", "Medida"],
         as: "Droga",
+        through: {
+          attributes: [],
+        }
       },
     ],
+    
   })
 }
 

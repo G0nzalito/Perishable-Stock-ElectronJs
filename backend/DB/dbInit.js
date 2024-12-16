@@ -14,9 +14,9 @@ async function dbInit() {
     // Tipo.sync({ force: true })
     // RemedioXDroga.sync({ force: true })
 
-    Droga.belongsToMany(Remedio, {through: RemedioXDroga, foreignKey: 'idDroga', as: 'Droga'})
-    Remedio.belongsToMany(Droga, { through: RemedioXDroga, foreignKey: 'idRemedio', as: 'Remedio' })
-    Remedio.hasOne(Tipo, { foreignKey: 'Tipo_id', as: 'Tipo' })
+    Droga.belongsToMany(Remedio, { through: {model: RemedioXDroga}, foreignKey: 'idDroga', as: 'Remedio' })
+    Remedio.belongsToMany(Droga, { through: RemedioXDroga, foreignKey: 'idRemedio', as: 'Droga' })
+    Remedio.hasOne(Tipo, { foreignKey: 'idTipo', sourceKey: 'Tipo_id' })
 
 
     sequelize.sync()
